@@ -2,7 +2,7 @@
     <section class="header-top">
         <div class="header-wrapper">
             <div class="brand-text">
-                <h3>LAB MANAGEMENT</h3>
+                <h3>LAB INVENTORY TOOL</h3>
             </div>
             <div class="left-header">
                 <div class="jarvis-logo">
@@ -31,80 +31,6 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="second-header"
-        *ngIf="roleName == 'Admin' || roleName == 'User' || roleName == 'Lead' || roleName == 'View'">
-        <div class="nav_bar">
-            <a routerLink="/home">Home</a>
-            <a routerLink="/allocation"
-                *ngIf="roleName == 'Admin' || roleName == 'User' || roleName == 'Lead'">Allocation</a>
-            <a routerLink="/approve" *ngIf="roleName == 'Admin' || roleName == 'Lead'">Approve</a>
-            <a routerLink="/report">Report</a>
-            <div class="dropdown d-flex" *ngIf="roleName == 'Admin' || roleName == 'Lead'">
-                <button class="dropdown_btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Master <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </button>
-                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton"
-                    style="margin-top: 28px;margin-left: -18px;">
-                    <a [routerLink]="['/program']" (click)="changeView()" class="dropdown-item">Platform</a>
-                    <!-- <a [routerLink]="['/sku']" (click)="changeView()" class="dropdown-item">SKU</a> -->
-                    <a [routerLink]="['/vendor']" (click)="changeView()" class="dropdown-item">Vendor</a>
-                    <a [routerLink]="['/team']" (click)="changeView()" class="dropdown-item">Team</a>
-                </div>
-            </div>
-            <!-- <a routerLink="/master">Master</a> -->
-            <!-- <a routerLink="/organization" *ngIf="roleName == 'Admin'">Organization</a>
-            <a routerLink="/LabEfficiencyUtilization" *ngIf="roleName == 'Admin'">Lab Efficiency Utilization</a>
-            <a routerLink="/forecast" *ngIf="roleName == 'Admin'">Forecast</a>
-            <a routerLink="/publish" *ngIf="roleName == 'Admin'">Publish</a> -->
-            <!-- <a routerLink="/user" *ngIf="roleName == 'Admin'">User</a> -->
-            <div class="dropdown d-flex" *ngIf="roleName == 'Admin'">
-                <button class="dropdown_btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    User <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </button>
-                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton"
-                    style="margin-top: 28px;margin-left: -18px;">
-                    <a [routerLink]="['/user']" (click)="changeView()" class="dropdown-item">User Details</a>
-                    <a [routerLink]="['/approver']" (click)="changeView()" class="dropdown-item">Approver Details</a>
-                </div>
-            </div>
-            <a routerLink="/approveuser" *ngIf="roleName == 'Admin'">New User Approval</a>
-            <div class="dropdown d-flex" *ngIf="roleName == 'Admin'">
-                <button class="dropdown_btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Phase 2 <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </button>
-                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton"
-                    style="margin-top: 28px;margin-left: -18px;">
-                    <a [routerLink]="['/organization']" (click)="changeView()" class="dropdown-item">Organization</a>
-                    <a [routerLink]="['/LabEfficiencyUtilization']" (click)="changeView()" class="dropdown-item">Lab
-                        Efficiency Utilization</a>
-                    <a [routerLink]="['/forecast']" (click)="changeView()" class="dropdown-item">Forecast</a>
-                    <a [routerLink]="['/publish']" (click)="changeView()" class="dropdown-item">Publish</a>
-                    <!--   <a [routerLink]="['/tutorial']" (click)="changeView()" class="dropdown-item">Tutorial</a>
-                    <a [routerLink]="['/feedback']" (click)="changeView()" class="dropdown-item">Feedback</a> -->
-                </div>
-            </div>
-            <div class="dropdown d-flex">
-                <button class="dropdown_btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Help <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </button>
-                <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton"
-                    style="margin-top: 28px;margin-left: -18px;">
-                    <a [routerLink]="['/tutorial']" (click)="changeView()" class="dropdown-item">Tutorial</a>
-                    <a [routerLink]="['/feedback']" (click)="changeView()" class="dropdown-item">Feedback</a>
-                </div>
-            </div>
-            <div class="float-right">
-                <a (click)="AddSuggestion(suggestionmodal)"> <i class="fa fa-envelope icon-style"
-                        aria-hidden="true"></i></a>
-                <span class="version">Version 1.0.0 ({{location}})</span>
-            </div>
-        </div>
-
     </section>
     <!--  <section>
         <nav aria-label="breadcrumb">

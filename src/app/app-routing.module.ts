@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
-import { AllocationComponent } from './allocation/allocation.component';
+/* import { AllocationComponent } from './allocation/allocation.component';
 import { ApproveComponent } from './approve/approve.component';
-import { ApproverComponent } from './approver/approver.component';
+import { ApproverComponent } from './approver/approver.component'; */
 import { AuhenticateComponent } from './auhenticate/auhenticate.component';
 import { AuthGuard } from './auth/auth.guard';
-import { FeedbackComponent } from './feedback/feedback.component';
+/* import { FeedbackComponent } from './feedback/feedback.component';
 import { ForecastComponent } from './forecast/forecast.component';
 import { HomeComponent } from './home/home.component';
 import { LabEfficiencyUtilizationComponent } from './lab-efficiency-utilization/lab-efficiency-utilization.component';
@@ -14,13 +14,14 @@ import { MasterComponent } from './master/master.component';
 import { OrganizationComponent } from './organization/organization.component';
 import { PlatformComponent } from './platform/platform.component';
 import { PublishComponent } from './publish/publish.component';
-import { ReportComponent } from './report/report.component';
+import { ReportComponent } from './report/report.component'; */
 // import { SkuComponent } from './sku/sku.component';
-import { TeamComponent } from './team/team.component';
+/* import { TeamComponent } from './team/team.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { UserApproveComponent } from './user-approve/user-approve.component';
 import { UserComponent } from './user/user.component';
-import { VendorComponent } from './vendor/vendor.component';
+import { VendorComponent } from './vendor/vendor.component'; */
+import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   {
     path: '',
@@ -32,7 +33,7 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard],
   },
-  {
+/*   {
     path: 'allocation',
     component: AllocationComponent,
     canActivate: [AuthGuard],
@@ -57,13 +58,13 @@ const routes: Routes = [
     path: 'program',
     component: PlatformComponent,
     canActivate: [AuthGuard],
-  },
+  }, */
 
   // {
   //   path: 'sku', component: SkuComponent
   // },
 
-  {
+/*   {
     path: 'vendor',
     component: VendorComponent,
     canActivate: [AuthGuard],
@@ -123,7 +124,7 @@ const routes: Routes = [
     path: 'approver',
     component: ApproverComponent,
     canActivate: [AuthGuard],
-  },
+  }, */
   {
     path: 'access-restrict',
     component: AccessDeniedComponent,
