@@ -1,8 +1,61 @@
-<div class="content">
-    <div class="row charts-content">
-
-    </div>
-    <br />
+<div class="homepage">
+        <div class="top-field">
+            <div class="search-bar">
+                <input type="search" class="form-control" placeholder="Search any fields">
+            </div>
+            <div class="btn-container">
+                <button class="filter-btn" (click)="enableFilters()"><i class="fas fa-filter"></i></button>
+                <ul *ngIf="isFilterDropdown">
+                    <li>
+                        <ng-select
+                        class="keyword"
+                        [items]="keyFilter"
+                        bindLabel="category"
+                        placeholder="select keyword"
+                        >
+                        </ng-select>
+                        <ng-select
+                        class="keyword"
+                        [items]="keyFilter"
+                        bindLabel="category"
+                        placeholder="select keyword"
+                        >
+                        </ng-select>
+                    </li>
+                </ul>
+                
+                <button class="download-btn">Download</button>
+            </div>
+        </div>
+        <hr>
+        <div class="content">
+            <table class="table table-bordered table-striped table-hover table-light">
+                <thead>
+                    <tr>
+                        <th >SNO</th>
+                        <th (click)="sortTable('name', tableData)">Name<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('asset', tableData)">Asset<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('etag', tableData)">Etag<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('assigned', tableData)">Assigned<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('assignedto', tableData)">Assigned to<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('changeGroup', tableData)">Change group<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('value', tableData)">Value<i class="fas fa-sort"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of tableData; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.asset}}</td>
+                        <td>{{data.etag}}</td>
+                        <td>{{data.assigned}}</td>
+                        <td>{{data.assignedto}}</td>
+                        <td>{{data.changeGroup}}</td>
+                        <td>{{data.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 </div>
 
 <!-- loader -->

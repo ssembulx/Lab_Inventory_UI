@@ -64,6 +64,8 @@ import { LabEfficiencyUtilizationComponent } from './lab-efficiency-utilization/
 import { ForecastComponent } from './forecast/forecast.component';
 import { TutorialComponent } from './tutorial/tutorial.component'; */
 import { AuhenticateComponent } from './auhenticate/auhenticate.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { NgSelectModule } from '@ng-select/ng-select';
 /* import { ApproverComponent } from './approver/approver.component'; */
 /* import { ToastrService } from 'ngx-toastr'; */
 @NgModule({
@@ -121,14 +123,13 @@ import { AuhenticateComponent } from './auhenticate/auhenticate.component';
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    /*  MatTableModule,
-     MatSortModule, */
     NgbModule,
     NgxSpinnerModule,
     OrderModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgSelectModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
