@@ -1,38 +1,43 @@
-<div class="homepage">
-        <div class="top-field">
-            <div class="search-bar">
-                <input type="search" class="form-control" placeholder="Search any fields">
-            </div>
-            <div class="btn-container">
-                <button class="filter-btn" (click)="enableFilters()"><i class="fas fa-filter"></i></button>
-                <ul *ngIf="isFilterDropdown">
-                    <li>
-                        <ng-select
-                        class="keyword"
-                        [items]="keyFilter"
-                        bindLabel="category"
-                        placeholder="select keyword"
-                        >
-                        </ng-select>
-                        <ng-select
-                        class="keyword"
-                        [items]="keyFilter"
-                        bindLabel="category"
-                        placeholder="select keyword"
-                        >
-                        </ng-select>
-                    </li>
-                </ul>
-                
-                <button class="download-btn">Download</button>
-            </div>
+<div class="homepage container-fluid">
+    <div class="top-field">
+        <div class="search-bar">
+            <input type="search" class="form-control" placeholder="Search any fields">
         </div>
-        <hr>
-        <div class="content">
-            <table class="table table-bordered table-striped table-hover table-light">
+        <div class="btn-container">
+            <button class="filter-btn" (click)="enableFilters()"><i class="fas fa-filter"></i></button>
+            <ul *ngIf="isFilterDropdown">
+                <li>
+                    <!--   <ng-select
+                        class="keyword"
+                        [items]="keyFilter"
+                        bindLabel="category"
+                        placeholder="select keyword"
+                        >
+                        </ng-select>
+                        <ng-select
+                        class="keyword"
+                        [items]="keyFilter"
+                        bindLabel="category"
+                        placeholder="select keyword"
+                        >
+                        </ng-select> -->
+                </li>
+            </ul>
+
+            <button class="download-btn">Download</button>
+        </div>
+    </div>
+    <hr>
+    <div class="content">
+        <div class="col-12 float-left  pl-3 pr-3">
+            <ngb-pagination class="d-flex justify-content-end" [pageSize]="10" [collectionSize]="tableData.length"
+                [(page)]="page" [boundaryLinks]="true" [maxSize]="5"></ngb-pagination>
+        </div>
+        <div class="col-12 float-left  pl-3 pr-3">
+            <table class="table table-bordered table-striped table-hover table-light  pl-3 pr-3">
                 <thead>
                     <tr>
-                        <th >SNO</th>
+                        <th>SNO</th>
                         <th (click)="sortTable('name', tableData)">Name<i class="fas fa-sort"></i></th>
                         <th (click)="sortTable('asset', tableData)">Asset<i class="fas fa-sort"></i></th>
                         <th (click)="sortTable('etag', tableData)">Etag<i class="fas fa-sort"></i></th>
@@ -43,8 +48,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of tableData; let i = index">
-                        <td>{{i + 1}}</td>
+                    <tr
+                        *ngFor="let data of tableData | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;; let i = index">
+                        <td>{{(i + 1) + (page - 1) * pageSize}}</td>
                         <td>{{data.name}}</td>
                         <td>{{data.asset}}</td>
                         <td>{{data.etag}}</td>
@@ -56,6 +62,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
 </div>
 
 <!-- loader -->

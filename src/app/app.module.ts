@@ -12,7 +12,7 @@ import { UserComponent } from './user/user.component';
 import { VPGLabComponent } from './vpg-lab/vpg-lab.component'; */
 /* import {MatTableModule} from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort'; */
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule,NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { OrderModule } from 'ngx-order-pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -65,7 +65,7 @@ import { ForecastComponent } from './forecast/forecast.component';
 import { TutorialComponent } from './tutorial/tutorial.component'; */
 import { AuhenticateComponent } from './auhenticate/auhenticate.component';
 import {MatTreeModule} from '@angular/material/tree';
-import { NgSelectModule } from '@ng-select/ng-select';
+/* import { NgSelectModule } from '@ng-select/ng-select'; */
 /* import { ApproverComponent } from './approver/approver.component'; */
 /* import { ToastrService } from 'ngx-toastr'; */
 @NgModule({
@@ -129,10 +129,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgSelectModule,
+    /* NgSelectModule, */
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    NgbPaginationModule
   ],
   providers: [
     SummaryService,
