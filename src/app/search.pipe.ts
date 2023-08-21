@@ -391,7 +391,8 @@ export class nonsivSearchLabDetails implements PipeTransform {
     return value.filter((val: any) => {
       return val.lab === null
         ? val.lab
-        : val.lab.toString()
+        : val.lab
+            .toString()
             .trim()
             .toLowerCase()
             .includes(args.toString().trim().toLowerCase());
@@ -412,10 +413,83 @@ export class nonsivSearchLabDetailsNo implements PipeTransform {
     return value.filter((val: any) => {
       return val.value === null
         ? val.value
-        : val.value.toString()
+        : val.value
+            .toString()
             .trim()
             .toLowerCase()
             .includes(args.toString().trim().toLowerCase());
     });
+  }
+}
+
+@Pipe({
+  name: 'customerTableFilter',
+})
+export class SearchTablePipe implements PipeTransform {
+  transform(value: any, args?: any): any {
+    if (!args) {
+      return value;
+    }
+    return value.filter((val: any) => {
+      return val.Name === null
+        ? val.Name
+        : val.Name?.toString()
+            .trim()
+            .toLowerCase()
+            .includes(args.toString().trim().toLowerCase()) ||
+            (val.Serial_number === null
+              ? val.Serial_number
+              : val.Serial_number?.toString()
+                  .trim()
+                  .toLowerCase()
+                  .includes(args.toString().trim().toLowerCase())) ||
+            (val.Assigned_to === null
+              ? val.Assigned_to
+              : val.Assigned_to?.toString()
+                  .trim()
+                  .toLowerCase()
+                  .includes(args.toString().trim().toLowerCase())) ||
+            (val.Model === null
+              ? val.Model
+              : val.Model?.toString()
+                  .trim()
+                  .toLowerCase()
+                  .includes(args.toString().trim().toLowerCase())) ||
+            (val.Managed_by === null
+              ? val.Managed_by
+              : val.Managed_by?.toString()
+                  .trim()
+                  .toLowerCase()
+                  .includes(args.toString().trim().toLowerCase())) ||
+            (val.Status === null
+              ? val.Status
+              : val.Status?.toString()
+                  .trim()
+                  .toLowerCase()
+                  .includes(args.toString().trim().toLowerCase())) ||
+            (val.Barcode === null
+              ? val.Barcode
+              : val.Barcode?.toString()
+                  .trim()
+                  .toLowerCase()
+                  .includes(args.toString().trim().toLowerCase()));
+    });
+    /*  return value.filter((val: any) => {
+      let rVal =
+        val.Name.toLocaleLowerCase().includes(args) ||
+        val.Serial_number.toLocaleLowerCase().includes(args) ||
+        val.Assigned_to.toLocaleLowerCase().includes(args) ||
+        val.Model.toLocaleLowerCase().includes(args) ||
+        val.Managed_by.toLocaleLowerCase().includes(args) ||
+        val.Status.toLocaleLowerCase().includes(args) ||
+        val.Barcode.toLocaleLowerCase().includes(args) ||
+        val.Class.toLocaleLowerCase().includes(args) ||
+        val.Cost_center.toLocaleLowerCase().includes(args) ||
+        val.Home_Location.toLocaleLowerCase().includes(args) ||
+        val.Location.toLocaleLowerCase().includes(args) ||
+        val.Owned_by.toLocaleLowerCase().includes(args) ||
+        val.Created.toLocaleLowerCase().includes(args);
+      return rVal;
+    }); */
   }
 }

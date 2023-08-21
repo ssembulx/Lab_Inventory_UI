@@ -10,8 +10,8 @@ import { ApproveComponent } from './approve/approve.component';
 import { MasterComponent } from './master/master.component';
 import { UserComponent } from './user/user.component';
 import { VPGLabComponent } from './vpg-lab/vpg-lab.component'; */
-/* import {MatTableModule} from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort'; */
+import {MatTableModule} from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { NgbModule,NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { OrderModule } from 'ngx-order-pipe';
@@ -40,7 +40,8 @@ import {
   SearchApprovedBy,
   nonsivSearchLab,
   nonsivSearchLabDetails,
-  nonsivSearchLabDetailsNo
+  nonsivSearchLabDetailsNo,
+  SearchTablePipe
 } from './search.pipe';
 import { SummaryService } from './shared/service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -68,6 +69,13 @@ import {MatTreeModule} from '@angular/material/tree';
 /* import { NgSelectModule } from '@ng-select/ng-select'; */
 /* import { ApproverComponent } from './approver/approver.component'; */
 /* import { ToastrService } from 'ngx-toastr'; */
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CdkTableModule } from '@angular/cdk/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +125,8 @@ import {MatTreeModule} from '@angular/material/tree';
     /* ApproverComponent, */
     nonsivSearchLab,
     nonsivSearchLabDetails,
-    nonsivSearchLabDetailsNo
+    nonsivSearchLabDetailsNo,
+    SearchTablePipe
   ],
   imports: [
     BrowserModule,
@@ -133,7 +142,16 @@ import {MatTreeModule} from '@angular/material/tree';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    NgbPaginationModule
+    NgbPaginationModule,
+    MatTooltipModule,
+    NgbTooltipModule,
+    MatTableModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCardModule,
+    MatSortModule,
+    MatPaginatorModule,
+    CdkTableModule
   ],
   providers: [
     SummaryService,

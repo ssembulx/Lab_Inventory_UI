@@ -1,35 +1,83 @@
 <div class="homepage container-fluid">
-    <div class="top-field">
-        <div class="search-bar">
-            <input type="search" class="form-control" placeholder="Search any fields">
+    <div class="top-field col-12 row float-left  mb-2">
+        <div class="search-bar col-3 float-left">
+            <input type="search" class="form-control" [(ngModel)]="search" placeholder="Search any fields">
         </div>
-        <div class="btn-container">
-            <button class="filter-btn" (click)="enableFilters()"><i class="fas fa-filter"></i></button>
-            <ul *ngIf="isFilterDropdown">
-                <li>
-                    <!--   <ng-select
-                        class="keyword"
-                        [items]="keyFilter"
-                        bindLabel="category"
-                        placeholder="select keyword"
-                        >
-                        </ng-select>
-                        <ng-select
-                        class="keyword"
-                        [items]="keyFilter"
-                        bindLabel="category"
-                        placeholder="select keyword"
-                        >
-                        </ng-select> -->
-                </li>
-            </ul>
+        <div class="btn-container col-3 float-left">
+            <button class="filter-btn" (click)="enableFilters()" placement="bottom" ngbTooltip="Show/Hide Filter"><i
+                    class="fas fa-filter"></i></button>
 
-            <button class="download-btn">Download</button>
+            <button class="filter-btn" placement="bottom" (click)="downloadallocatedList()" ngbTooltip="Download"><i
+                    class="fas fa-download"></i></button>
+        </div>
+    </div>
+    <div class="row" *ngIf="isFilterDropdown">
+        <!--  <div class="col-12 row float-left  mb-2">
+            <div class="col-3 float-left">
+                <select class="form-control" name="Platform">
+                    <option value="none">Choose...</option>
+                    <option *ngFor="let category of keyFilter" [value]="category.id">
+                        {{ category.value }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-3 float-left">
+                <select class="form-control" name="Platform">
+                    <option value="none">Choose...</option>
+                    <option *ngFor="let category of conditionList" [value]="category.id">
+                        {{ category.value }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-3 float-left">
+                <select class="form-control" name="Platform">
+                    <option value="none">Choose...</option>
+                </select>
+            </div>
+            <div class="col-3 float-left">
+                <button class="filter-btn" (click)="enableFilters()" placement="bottom" ngbTooltip="Delete"><i
+                        class="fas fa-times"></i></button>
+            </div>
+        </div> -->
+        <div class="col-12 row float-left  mb-2" *ngFor="let field of fieldArray;let i=index;let last = last;">
+            <div class="col-3 float-left">
+                <select class="form-control" name="key" [(ngModel)]="selectedKeyFilter">
+                    <option value="none">Choose...</option>
+                    <option *ngFor="let category of keyFilter" [value]="category.value">
+                        {{ category.value }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-3 float-left">
+                <select class="form-control" name="condition" [(ngModel)]="selectedCondition">
+                    <option value="none">Choose...</option>
+                    <option *ngFor="let category of conditionList" [value]="category.value">
+                        {{ category.value }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-3 float-left">
+                <input type="search" class="form-control" [(ngModel)]="inputValue">
+                <!-- <select class="form-control" name="Platform">
+                    <option value="none">Choose...</option>
+                    <option *ngFor="let category of platformList" [value]="category.PlatformId">
+                        {{ category.PlatformShortName }}
+                    </option>
+                </select> -->
+            </div>
+            <div class="col-3 float-left">
+                <button class="filter-btn" *ngIf="!last" (click)="deleteFieldValue(i)" placement="bottom"
+                    ngbTooltip="Delete"><i class="fas fa-times"></i></button>
+                <button class="filter-btn" *ngIf="last" placement="bottom" ngbTooltip="Add" (click)="addFieldValue()"><i
+                        class="fas fa-plus"></i></button>
+                <button class="filter-btn" *ngIf="last" placement="bottom" (click)="applyFilter()"
+                    ngbTooltip=" Run Filter" style="width: auto;">Run</button>
+            </div>
         </div>
     </div>
     <hr>
     <div class="content">
-        <div class="col-12 float-left  pl-3 pr-3">
+        <!--  <div class="col-12 float-left  pl-3 pr-3">
             <ngb-pagination class="d-flex justify-content-end" [pageSize]="10" [collectionSize]="tableData.length"
                 [(page)]="page" [boundaryLinks]="true" [maxSize]="5"></ngb-pagination>
         </div>
@@ -38,29 +86,41 @@
                 <thead>
                     <tr>
                         <th>SNO</th>
-                        <th (click)="sortTable('name', tableData)">Name<i class="fas fa-sort"></i></th>
-                        <th (click)="sortTable('asset', tableData)">Asset<i class="fas fa-sort"></i></th>
-                        <th (click)="sortTable('etag', tableData)">Etag<i class="fas fa-sort"></i></th>
-                        <th (click)="sortTable('assigned', tableData)">Assigned<i class="fas fa-sort"></i></th>
-                        <th (click)="sortTable('assignedto', tableData)">Assigned to<i class="fas fa-sort"></i></th>
-                        <th (click)="sortTable('changeGroup', tableData)">Change group<i class="fas fa-sort"></i></th>
-                        <th (click)="sortTable('value', tableData)">Value<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('Name', tableData)">Name<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('Serial_number', tableData)">Serial No<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('Assigned_to', tableData)">Assigned To<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('Model', tableData)">Model<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('Managed_by', tableData)">Managed By<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('Status', tableData)">Status<i class="fas fa-sort"></i></th>
+                        <th (click)="sortTable('Barcode', tableData)">Barcode<i class="fas fa-sort"></i></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr
-                        *ngFor="let data of tableData | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;; let i = index">
+                        *ngFor="let data of tableData | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize | customerTableFilter:search; let i = index">
                         <td>{{(i + 1) + (page - 1) * pageSize}}</td>
-                        <td>{{data.name}}</td>
-                        <td>{{data.asset}}</td>
-                        <td>{{data.etag}}</td>
-                        <td>{{data.assigned}}</td>
-                        <td>{{data.assignedto}}</td>
-                        <td>{{data.changeGroup}}</td>
-                        <td>{{data.value}}</td>
+                        <td>{{data.Name}}</td>
+                        <td>{{data.Serial_number}}</td>
+                        <td>{{data.Assigned_to}}</td>
+                        <td>{{data.Model}}</td>
+                        <td>{{data.Managed_by}}</td>
+                        <td>{{data.Status}}</td>
+                        <td>{{data.Barcode}}</td>
                     </tr>
                 </tbody>
             </table>
+        </div> -->
+        <div class="col-12 float-left pl-3 pr-3">
+            <table mat-table [dataSource]="dataSourceWithPageSize" class="mat-elevation-z8">
+                <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+                    <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+                    <td mat-cell *matCellDef="let emp">{{ emp[column] }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let emprow; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator #paginatorPageSize [pageSizeOptions]="pageSizes"></mat-paginator>
         </div>
     </div>
 </div>

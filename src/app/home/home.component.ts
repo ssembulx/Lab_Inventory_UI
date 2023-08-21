@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 // amCharts imports
 // import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
@@ -19,7 +19,40 @@ import { ToastrService } from 'ngx-toastr';
 import { is } from '@amcharts/amcharts4/core';
 import { ExcelService } from '../shared/excel.service';
 import { ExportService } from '../shared/export.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+export interface Employee {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  gender: string;
+  jobtitle: string;
+  department: string;
+  project: Project;
+}
 
+export interface Project {
+  name: string;
+  id: number;
+}
+
+interface Device {
+  Name: string;
+  Serial_number: string;
+  Assigned_to: string;
+  Model: string;
+  Managed_by: string;
+  Status: string;
+  Barcode: string;
+  Class: string;
+  Cost_center: string;
+  Home_Location: string;
+  Location: string;
+  Owned_by: string;
+  Created: string;
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -28,239 +61,80 @@ import { ExportService } from '../shared/export.service';
 export class HomeComponent implements OnInit {
   pageSize = 10;
   page = 1;
-  tableData = [
-    {
-      name: 's/n FZBS327000DA',
-      asset: '',
-      etag: '',
-      assigned: '2021-07-23 17:33:41',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n BC00000797038',
-      asset: '',
-      etag: '',
-      assigned: '2020-09-09 23:28:36',
-      assignedto: '11620094 - RAMACHANDRAN, RAGINI',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n 4750W8I0000054',
-      asset: '',
-      etag: '',
-      assigned: '2020-09-11 01:41:37',
-      assignedto: '11607667 - PRASAD MUDURU, REDDY',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n D0KE221100229',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-11 01:41:41',
-      assignedto: '11410799 - BALAKRISHNAN, ALBIN',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n EA-550PSN171200116',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-09 23:28:31',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n NVD18QW230050',
-      asset: '',
-      etag: '',
-      assigned: '2020-09-09 23:28:32',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n NVD18QW230028',
-      asset: '',
-      etag: '',
-      assigned: '2020-09-11 01:41:40',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n NVD18QW230055',
-      asset: '',
-      etag: '',
-      assigned: '2021-07-23 17:28:04',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n NVD18QW230074',
-      asset: '',
-      etag: '',
-      assigned: '	2021-07-23 17:34:31',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n NVD18QW230038',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-11 01:41:39',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n D0KE221100229',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-11 01:41:41',
-      assignedto: '11410799 - BALAKRISHNAN, ALBIN',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n EA-550PSN171200116',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-09 23:28:31',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n NVD18QW230050',
-      asset: '',
-      etag: '',
-      assigned: '2020-09-09 23:28:32',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n D0KE221100229',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-11 01:41:41',
-      assignedto: '11410799 - BALAKRISHNAN, ALBIN',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n EA-550PSN171200116',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-09 23:28:31',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n NVD18QW230050',
-      asset: '',
-      etag: '',
-      assigned: '2020-09-09 23:28:32',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n D0KE221100229',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-11 01:41:41',
-      assignedto: '11410799 - BALAKRISHNAN, ALBIN',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n EA-550PSN171200116',
-      asset: '',
-      etag: '',
-      assigned: '	2020-09-09 23:28:31',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-    {
-      name: 's/n NVD18QW230050',
-      asset: '',
-      etag: '',
-      assigned: '2020-09-09 23:28:32',
-      assignedto: '11521242 - SULANAYAKANAHALLI RAMRAO, MURALIDHAR',
-      changeGroup: '',
-      value: '',
-    },
-  ];
+  selectedKeyFilter = 'Home Location';
   keyFilter = [
     {
-      category: 'Admin lock',
-      subCategory: [
-        { value: 'is' },
-        { value: 'is Not' },
-        { value: 'is anything' },
-        { value: 'is one of' },
-      ],
+      id: 1,
+      value: 'Admin lock',
     },
     {
-      category: 'Admin',
-      subCategory: [
-        { value: 'is' },
-        { value: 'is Not' },
-        { value: 'is anything' },
-        { value: 'is one of' },
-      ],
+      id: 2,
+      value: 'Admin',
     },
     {
-      category: 'Admin lock',
-      subCategory: [
-        { value: 'is' },
-        { value: 'is Not' },
-        { value: 'is anything' },
-        { value: 'is one of' },
-      ],
-    },
-    {
-      category: 'Admin',
-      subCategory: [
-        { value: 'is' },
-        { value: 'is Not' },
-        { value: 'is anything' },
-        { value: 'is one of' },
-      ],
-    },
-    {
-      category: 'Admin lock',
-      subCategory: [
-        { value: 'is' },
-        { value: 'is Not' },
-        { value: 'is anything' },
-        { value: 'is one of' },
-      ],
+      id: 3,
+      value: 'Home Location',
     },
   ];
+  selectedCondition = 'contains';
+  conditionList = [
+    { id: 1, value: 'is' },
+    { id: 2, value: 'is Not' },
+    { id: 3, value: 'is anything' },
+    { id: 4, value: 'is one of' },
+    { id: 5, value: 'contains' },
+  ];
+  inputValue = '';
   sortKey: string = 'name';
   reverseSort: boolean = true;
+  tableData: Device[];
+  originalData: Device[];
+  applyFilter() {
+    debugger;
+    let temp = this.tableData;
+    // this.tableData= this.tableData.filter(o => {return (o.Home_Location == 'England' || o.name == 'Mark')})
+    this.tableData = this.tableData.filter((item) => {
+      /* for (let key in filter) {
+        if (item[key] === undefine.inputValue filter[key])
+          return false;
+      } */
+      if (
+        this.selectedKeyFilter == 'Home Location' &&
+        this.selectedCondition == 'contains'
+      ) {
+        if (item.Home_Location == this.inputValue) {
+          return true;
+        }
+      }
+    });
+  }
   constructor(
     private service: SummaryService,
     private toastrService: ToastrService,
     private exportService: ExcelService,
-    private exportService1: ExportService
-  ) {}
+    private exportService1: ExportService,
+    private http: HttpClient
+  ) {
+    this.getJSON().subscribe((data) => {
+      debugger;
+      console.log(data);
+      this.tableData = data;
+      this.originalData = data;
+    });
+  }
+  public getJSON(): Observable<any> {
+    return this.http.get('/assets/data_list.json');
+  }
+
   labwiseChartLoader: boolean = false;
   isFilterDropdown: boolean = false;
   ngOnInit() {
     this.labwiseChartLoader = true;
+    this.dataSource = new MatTableDataSource(this.EmpData);
+    this.dataSourceWithPageSize = new MatTableDataSource(this.EmpData);
   }
+  /* search table */
+  search = '';
   /** Table sorting */
   sortTable(key: string, data: any) {
     if (this.sortKey === key) {
@@ -348,5 +222,150 @@ export class HomeComponent implements OnInit {
   /** dropdown filter enable/disable */
   enableFilters() {
     this.isFilterDropdown = !this.isFilterDropdown;
+    this.tableData = this.originalData;
+  }
+
+  downloadallocatedList() {
+    this.exportService.exportAsExcelFile(this.tableData, 'INVENTORY LIST');
+  }
+
+  /* add & delete filter */
+  public fieldArray: Array<any> = [{}];
+  public newAttribute: any = {};
+
+  addFieldValue() {
+    this.fieldArray.push(this.newAttribute);
+    this.newAttribute = {};
+  }
+
+  deleteFieldValue(index: any) {
+    this.fieldArray.splice(index, 1);
+  }
+
+  /* mat table */
+  displayedColumns: string[] = [
+    'id',
+    'firstname',
+    'lastname',
+    'email',
+    'gender',
+    'jobtitle',
+    'department',
+  ];
+
+  EmpData: Employee[] = [
+    {
+      id: 1,
+      firstname: 'Mellie',
+      lastname: 'Gabbott',
+      email: 'mgabbott0@indiatimes.com',
+      gender: 'Female',
+      department: 'Support',
+      jobtitle: 'Support Analyst',
+      project: { name: 'project1', id: 1 },
+    },
+    {
+      id: 2,
+      firstname: 'Yehudi',
+      lastname: 'Ainsby',
+      email: 'yainsby1@w3.org',
+      gender: 'Female',
+      department: 'Support',
+      jobtitle: 'Support Analyst',
+      project: { name: 'project2', id: 2 },
+    },
+    {
+      id: 3,
+      firstname: 'Noellyn',
+      lastname: 'Primett',
+      email: 'nprimett2@ning.com',
+      gender: 'Female',
+      department: 'Human Resources',
+      jobtitle: 'Project Manager',
+      project: { name: 'project3', id: 3 },
+    },
+    {
+      id: 4,
+      firstname: 'Stefanie',
+      lastname: 'Yurenin',
+      email: 'syurenin3@boston.com',
+      gender: 'Female',
+      department: 'Marketing',
+      jobtitle: 'Senior officer',
+      project: { name: 'project4', id: 4 },
+    },
+    {
+      id: 5,
+      firstname: 'Stormi',
+      lastname: "O'Lunny",
+      email: 'solunny4@patch.com',
+      gender: 'Female',
+      department: 'Engineering',
+      jobtitle: 'Software Engineer',
+      project: { name: 'project5', id: 5 },
+    },
+    {
+      id: 6,
+      firstname: 'Keelia',
+      lastname: 'Giraudy',
+      email: 'kgiraudy5@nba.com',
+      gender: 'Male',
+      department: 'Marketing',
+      jobtitle: 'Senior officer',
+      project: { name: 'project6', id: 6 },
+    },
+    {
+      id: 7,
+      firstname: 'Ikey',
+      lastname: 'Laight',
+      email: 'ilaight6@wiley.com',
+      gender: 'Male',
+      department: 'Support',
+      jobtitle: 'Support Analyst',
+      project: { name: 'project7', id: 7 },
+    },
+    {
+      id: 8,
+      firstname: 'Adrianna',
+      lastname: 'Ruddom',
+      email: 'aruddom7@seattletimes.com',
+      gender: 'Male',
+      department: 'Marketing',
+      jobtitle: 'Senior officer',
+      project: { name: 'project8', id: 8 },
+    },
+    {
+      id: 9,
+      firstname: 'Dionysus',
+      lastname: 'McCory',
+      email: 'dmccory8@ox.ac.uk',
+      gender: 'Male',
+      department: 'Engineering',
+      jobtitle: 'Software Engineer',
+      project: { name: 'project9', id: 9 },
+    },
+    {
+      id: 10,
+      firstname: 'Claybourne',
+      lastname: 'Shellard',
+      email: 'cshellard9@rediff.com',
+      gender: 'Male',
+      department: 'Engineering',
+      jobtitle: 'Software Engineer',
+      project: { name: 'project10', id: 10 },
+    },
+  ];
+
+  @ViewChild('paginator') paginator: MatPaginator;
+  @ViewChild('paginatorPageSize') paginatorPageSize: MatPaginator;
+
+  pageSizes = [3, 5, 7];
+  dataSource: MatTableDataSource<Employee>;
+  dataSourceWithPageSize: MatTableDataSource<Employee>;
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.EmpData);
+    this.dataSourceWithPageSize = new MatTableDataSource(this.EmpData);
+    this.dataSource.paginator = this.paginator;
+    this.dataSourceWithPageSize.paginator = this.paginatorPageSize;
   }
 }

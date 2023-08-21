@@ -1,20 +1,23 @@
-.homepage{
+.homepage {
     /* padding: 65px 0 25px; */
     font-family: "IntelOne Display AR Regular";
     font-weight: 400;
     overflow: auto;
     height: 100vh;
-    .top-field{
-        display: flex;
+
+    .top-field {
+
+        /* display: flex;
         align-items: center;
-        justify-content: flex-start;
-        margin-left: 20px;
-        .search-bar{
-            width: 20%;
+        justify-content: flex-start; */
+        /*  margin-left: 20px; */
+        .search-bar {
+            /* width: 20%; */
             margin-right: 15px;
         }
-        .btn-container{
-            .filter-btn{
+
+        .btn-container {
+            .filter-btn {
                 background: #0071c5;
                 margin-right: 10px;
                 border: none;
@@ -24,7 +27,8 @@
                 line-height: 26px;
                 width: 31px;
             }
-            .download-btn{
+
+            .download-btn {
                 height: 28px;
                 border: none;
                 background-color: #0071c5;
@@ -34,7 +38,8 @@
                 width: 90px;
                 border-radius: 4px;
             }
-            ul{
+
+            ul {
                 z-index: 1000;
                 position: absolute;
                 height: 10rem;
@@ -47,26 +52,32 @@
                 margin-top: 5px;
                 border-top-right-radius: 0px;
                 border-top-left-radius: 0px;
-                li{
+
+                li {
                     display: flex;
                 }
             }
-        } 
-       
+        }
+
     }
-    hr{
+
+    hr {
         margin: 11px 0px;
     }
-    .content{
-       /*  display: flex;
+
+    .content {
+
+        /*  display: flex;
         justify-content: center; */
-        .table{
+        .table {
             width: 100%;
-            thead{
+
+            thead {
                 text-align: center;
-                tr{
-                    th{
-                        i{
+
+                tr {
+                    th {
+                        i {
                             margin: 0px 5px;
                             font-size: 13px;
                         }
@@ -75,9 +86,32 @@
             }
         }
     }
-} 
+}
 
-::ng-deep ng-select{
+.download-btn {
+    /* height: 28px; */
+    border: none;
+    background-color: #0071c5;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    /* width: 90px; */
+    border-radius: 4px;
+    padding: 5px 10px 5px 10px;
+}
+
+.filter-btn {
+    background: #0071c5;
+    margin-right: 10px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 3px;
+    line-height: 26px;
+    width: 31px;
+}
+
+::ng-deep ng-select {
     width: 50% !important;
     margin: 5px 5px !important;
     border: 1px solid black !important;
@@ -85,6 +119,7 @@
     line-height: 25px !important;
     font-size: 13px !important;
 }
+
 ::ng-deep .ng-dropdown-panel .scroll-host {
     max-height: 7rem !important;
     background-color: white !important;

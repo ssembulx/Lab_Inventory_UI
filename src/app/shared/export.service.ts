@@ -3,42 +3,34 @@ import * as FileSaver from 'file-saver';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
-  })
-
+  providedIn: 'root',
+})
 export class ExportService {
+  constructor() {}
 
- constructor() { }
- 
- exportExcel(jsonData: any[], fileName: string){
-  let workbook = new Workbook();
-  let worksheet = workbook.addWorksheet('Report Data');
-  let testcaseData = jsonData;
+  exportExcel(jsonData: any[], fileName: string) {
+    debugger;
+    let workbook = new Workbook();
+    let worksheet = workbook.addWorksheet('Report Data');
+    let testcaseData = jsonData;
 
-  let headerNameList = ['Lab Details','Team','#Bench','Bench Details','Program','SKU','Vendor','Allocated To','From WW','To WW','Duration','Remarks'];
-  // let headerRow = worksheet.addRow(headerNameList);
-  worksheet.addRow(headerNameList);
+    // let headerNameList = ['Lab Details','Team','#Bench','Bench Details','Program','SKU','Vendor','Allocated To','From WW','To WW','Duration','Remarks'];
+    // let headerRow = worksheet.addRow(headerNameList);
+    // worksheet.addRow(headerNameList);
 
-         
- testcaseData.forEach((item: any) => {
-  let rowList = [item.Location__Name, item.Team, item.BenchData?.length,item.BenchData,item.Program, item.Sku, item.Vendor, item.AllocatedTo[0].Name, item.FromWW, item.ToWW,item.Duration, item.Remarks];
-  const row = worksheet.addRow(rowList);
-  }),
-  
-  
-  workbook.xlsx.writeBuffer().then( (data: any) => {
+    testcaseData.forEach((item: any) => {
+      // let rowList = [item.Location__Name, item.Team, item.BenchData?.length,item.BenchData,item.Program, item.Sku, item.Vendor, item.AllocatedTo[0].Name, item.FromWW, item.ToWW,item.Duration, item.Remarks];
+      //const row = worksheet.addRow(rowList);
+      const row = worksheet.addRow(item);
+    }),
+      workbook.xlsx.writeBuffer().then((data: any) => {
         let blob = new Blob([data], {
-          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         });
         FileSaver(blob, 'ReportData');
-      })
- }
+      });
+  }
 }
-
-
-
-
-
 
 // import { Injectable } from '@angular/core';
 // import * as FileSaver from 'file-saver'

@@ -30,7 +30,8 @@
       "exceljs": [
         "node_modules/exceljs/dist/exceljs.min"
       ]
-    }
+    },
+    "resolveJsonModule": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
